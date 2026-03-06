@@ -6,13 +6,8 @@
   <title>Test rápido de Ciberseguridad</title>
 
   <style>
-    *{
-      box-sizing:border-box;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
 
     body{
       margin:0;
@@ -82,7 +77,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:24px;
+      gap:18px;
       flex-wrap:wrap;
       margin-bottom:18px;
     }
@@ -96,8 +91,8 @@
     }
 
     .logo{
-      height:72px;
-      max-width:220px;
+      height:78px;
+      max-width:240px;
       object-fit:contain;
       display:block;
       background:rgba(255,255,255,0.04);
@@ -134,6 +129,41 @@
       font-size:16px;
     }
 
+    .email-gate{
+      max-width:520px;
+      margin:22px auto 0;
+      text-align:left;
+    }
+
+    .email-label{
+      display:block;
+      margin-bottom:8px;
+      color:#dff7ff;
+      font-weight:bold;
+    }
+
+    .email-input{
+      width:100%;
+      padding:14px 16px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.15);
+      background:rgba(255,255,255,0.96);
+      color:#101828;
+      font-size:16px;
+      outline:none;
+    }
+
+    .email-input:focus{
+      border-color:#00c6ff;
+      box-shadow:0 0 0 3px rgba(0,198,255,0.18);
+    }
+
+    .email-help{
+      margin-top:8px;
+      color:#bfefff;
+      font-size:14px;
+    }
+
     .start-wrap{
       text-align:center;
       margin-top:22px;
@@ -157,8 +187,11 @@
       box-shadow:0 12px 28px rgba(0,114,255,0.35);
     }
 
-    .cyber-button:active{
-      transform:translateY(0);
+    .cyber-button:disabled{
+      opacity:0.55;
+      cursor:not-allowed;
+      transform:none;
+      box-shadow:none;
     }
 
     .quiz-shell{
@@ -296,14 +329,8 @@
       box-shadow:0 18px 48px rgba(0,0,0,0.32);
     }
 
-    .popup.good{
-      border:4px solid #2fbf71;
-    }
-
-    .popup.medium{
-      border:4px solid #f0b429;
-    }
-
+    .popup.good{ border:4px solid #2fbf71; }
+    .popup.medium{ border:4px solid #f0b429; }
     .popup.bad{
       border:4px solid #e55353;
       animation:shake 0.45s ease-in-out 2;
@@ -323,20 +350,9 @@
       margin-bottom:14px;
     }
 
-    .good .result-badge{
-      background:#e7f8ef;
-      color:#1e8e52;
-    }
-
-    .medium .result-badge{
-      background:#fff6df;
-      color:#9a6700;
-    }
-
-    .bad .result-badge{
-      background:#fdecec;
-      color:#b42318;
-    }
+    .good .result-badge{ background:#e7f8ef; color:#1e8e52; }
+    .medium .result-badge{ background:#fff6df; color:#9a6700; }
+    .bad .result-badge{ background:#fdecec; color:#b42318; }
 
     .score-line{
       font-size:18px;
@@ -347,10 +363,6 @@
       font-size:42px;
       font-weight:bold;
       color:#0b2440;
-    }
-
-    .popup p{
-      line-height:1.55;
     }
 
     .feedback-list{
@@ -424,49 +436,24 @@
     }
 
     @keyframes fall{
-      to{
-        transform:translateY(110vh) rotate(720deg);
-        opacity:1;
-      }
+      to{ transform:translateY(110vh) rotate(720deg); opacity:1; }
     }
 
     @keyframes rocketUp{
-      0%{
-        transform:translateY(0) scale(0.8);
-        opacity:0;
-      }
-      20%{
-        opacity:1;
-      }
-      100%{
-        transform:translateY(-100vh) scale(1.15);
-        opacity:0;
-      }
+      0%{ transform:translateY(0) scale(0.8); opacity:0; }
+      20%{ opacity:1; }
+      100%{ transform:translateY(-100vh) scale(1.15); opacity:0; }
     }
 
     @keyframes burstPop{
-      0%{
-        transform:scale(0.2);
-        opacity:1;
-      }
-      100%{
-        transform:scale(6.2);
-        opacity:0;
-      }
+      0%{ transform:scale(0.2); opacity:1; }
+      100%{ transform:scale(6.2); opacity:0; }
     }
 
     @keyframes dropBad{
-      0%{
-        transform:translateY(-40px) scale(0.8);
-        opacity:0;
-      }
-      15%{
-        opacity:1;
-      }
-      100%{
-        transform:translateY(110vh) scale(1.2);
-        opacity:0.2;
-      }
+      0%{ transform:translateY(-40px) scale(0.8); opacity:0; }
+      15%{ opacity:1; }
+      100%{ transform:translateY(110vh) scale(1.2); opacity:0.2; }
     }
 
     @keyframes shake{
@@ -479,41 +466,17 @@
     }
 
     @media (max-width: 900px){
-      .intro-boxes{
-        grid-template-columns:1fr;
-      }
+      .intro-boxes{ grid-template-columns:1fr; }
     }
 
     @media (max-width: 768px){
-      .container{
-        width:min(100% - 20px, 1100px);
-      }
-
-      .logo{
-        height:58px;
-        max-width:170px;
-      }
-
-      .header{
-        gap:14px;
-      }
-
-      .header h1{
-        font-size:30px;
-      }
-
-      .question p{
-        font-size:17px;
-      }
-
-      .popup{
-        padding:20px;
-      }
-
-      .score-big{
-        font-size:34px;
-      }
-
+      .container{ width:min(100% - 20px, 1100px); }
+      .logo{ height:58px; max-width:170px; }
+      .header{ gap:14px; }
+      .header h1{ font-size:30px; }
+      .question p{ font-size:17px; }
+      .popup{ padding:20px; }
+      .score-big{ font-size:34px; }
       .secondary-btn{
         margin-left:0;
         margin-top:10px;
@@ -530,7 +493,6 @@
   <section class="intro-screen" id="introScreen">
     <div class="intro-card">
       <div class="header">
-        <img src="alma logo.png" alt="Logo Alma" class="logo">
         <h1>🔐 Test rápido de Ciberseguridad</h1>
         <img src="logo-finsa-grupo.png" alt="Logo Finsa Grupo" class="logo">
       </div>
@@ -554,8 +516,14 @@
         </div>
       </div>
 
+      <div class="email-gate">
+        <label for="userEmail" class="email-label">Correo electrónico</label>
+        <input type="email" id="userEmail" class="email-input" placeholder="nombre@empresa.com">
+        <p class="email-help">Introduce tu correo para desbloquear el inicio del test.</p>
+      </div>
+
       <div class="start-wrap">
-        <button class="cyber-button" onclick="startQuiz()">Comenzar test</button>
+        <button class="cyber-button" id="startBtn" onclick="startQuiz()" disabled>Comenzar test</button>
       </div>
     </div>
   </section>
@@ -564,7 +532,7 @@
     <div class="top-panel">
       <div class="top-panel-row">
         <div class="top-panel-title">Panel de progreso</div>
-        <div class="counter" id="counterText">0 de 10 respondidas</div>
+        <div class="counter" id="counterText">0 de 22 respondidas</div>
       </div>
       <div class="progress-wrap">
         <div class="progress-bar" id="progressBar"></div>
@@ -573,7 +541,6 @@
 
     <div class="quiz-card">
       <div class="header">
-        <img src="alma logo.png" alt="Logo Alma" class="logo">
         <h1>🔐 Test rápido de Ciberseguridad</h1>
         <img src="logo-finsa-grupo.png" alt="Logo Finsa Grupo" class="logo">
       </div>
@@ -752,6 +719,9 @@
 
   <script>
     const totalQuestions = 22;
+    let userEmailValue = "";
+
+    const RESULTS_ENDPOINT = "https://euphonious-kashata-5f7a83.netlify.app/.netlify/functions/save-result";
 
     const answersData = {
       q1: { correctValue: "2", question: "¿Tu contraseña es realmente robusta o es fácil de adivinar?", correctText: "Usar contraseñas largas, únicas y difíciles de adivinar para cada servicio." },
@@ -778,7 +748,30 @@
       q22: { correctValue: "2", question: "Si encuentras un USB o dispositivo externo, ¿lo conectarías para ver qué contiene?", correctText: "No conectar nunca un dispositivo externo desconocido." }
     };
 
+    function isValidEmail(email){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    const emailInput = document.getElementById("userEmail");
+    const startBtn = document.getElementById("startBtn");
+
+    emailInput.addEventListener("input", function(){
+      const value = this.value.trim();
+      if(isValidEmail(value)){
+        startBtn.disabled = false;
+        userEmailValue = value;
+      } else {
+        startBtn.disabled = true;
+        userEmailValue = "";
+      }
+    });
+
     function startQuiz(){
+      if(!userEmailValue){
+        alert("Introduce un correo válido para comenzar.");
+        return;
+      }
+
       document.getElementById("introScreen").style.display = "none";
       document.getElementById("quizShell").style.display = "block";
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -806,7 +799,25 @@
       }
     });
 
-    function calculateScore(){
+    async function saveResult(payload){
+      try{
+        const response = await fetch(RESULTS_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if(!response.ok){
+          console.error("No se pudo guardar el resultado");
+        }
+      }catch(error){
+        console.error("Error guardando resultado:", error);
+      }
+    }
+
+    async function calculateScore(){
       let total = 0;
       let answered = 0;
       let mistakesHtml = "";
@@ -839,6 +850,14 @@
       const maxScore = totalQuestions * 2;
       const percent = Math.round((total / maxScore) * 100);
 
+      await saveResult({
+        email: userEmailValue,
+        score: total,
+        maxScore: maxScore,
+        percent: percent,
+        date: new Date().toISOString()
+      });
+
       let levelClass = "";
       let levelText = "";
       let extraMessage = "";
@@ -852,6 +871,7 @@
         levelClass = "medium";
         levelText = "🟡 Nivel medio";
         extraMessage = "Tienes varias buenas prácticas, pero todavía hay algunos puntos que conviene reforzar para reducir riesgos.";
+        launchGoodEffects();
       } else {
         levelClass = "bad";
         levelText = "⚠️ Nivel de riesgo alto";
@@ -867,15 +887,11 @@
         <div class="score-big">${total}/${maxScore}</div>
         <p><strong>Equivale a un ${percent}% de buenas prácticas.</strong></p>
         <p>${extraMessage}</p>
-
         ${
           mistakesHtml
-            ? `<h3>Lo que deberías mejorar</h3>
-               <ul class="feedback-list">${mistakesHtml}</ul>`
-            : `<h3>Perfecto</h3>
-               <p>No has fallado ninguna respuesta. Tus hábitos de seguridad son excelentes. Puedes estar bastante tranquil@ 😄</p>`
+            ? `<h3>Lo que deberías mejorar</h3><ul class="feedback-list">${mistakesHtml}</ul>`
+            : `<h3>Perfecto</h3><p>No has fallado ninguna respuesta. Tus hábitos de seguridad son excelentes. Puedes estar bastante tranquil@ 😄</p>`
         }
-
         <button class="cyber-button close-btn" onclick="closePopup()">Cerrar</button>
         <button class="cyber-button secondary-btn close-btn" onclick="restartQuiz()">Repetir test</button>
       `;
@@ -953,7 +969,6 @@
       }, 3600);
     }
 
-    // Fondo Matrix
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
 
@@ -979,7 +994,6 @@
     function drawMatrix(){
       ctx.fillStyle = "rgba(2, 11, 26, 0.08)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
       ctx.fillStyle = "#00e5ff";
       ctx.font = fontSize + "px monospace";
 
@@ -990,7 +1004,6 @@
         if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
           drops[i] = 0;
         }
-
         drops[i]++;
       }
     }
