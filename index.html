@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test rápido de Ciberseguridad</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:#ffffff;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    #matrix{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:-3;
+      background:#03101f;
+    }
+
+    .bg-overlay{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background:
+        radial-gradient(circle at top right, rgba(0,255,255,0.08), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(0,102,255,0.12), transparent 30%),
+        linear-gradient(180deg, rgba(2,10,22,0.55), rgba(2,10,22,0.82));
+      pointer-events:none;
+    }
+
+    .cyber-grid{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(0,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.06) 1px, transparent 1px);
+      background-size:40px 40px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0));
+    }
+
+    .container{
+      width:min(1100px, calc(100% - 32px));
+      margin:0 auto;
+      padding:24px 0 50px;
+    }
+
+    .intro-screen{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .intro-card{
+      width:min(900px, 100%);
+      background:rgba(4,18,38,0.82);
+      border:1px solid rgba(0,255,255,0.18);
+      border-radius:22px;
+      box-shadow:0 12px 40px rgba(0,0,0,0.35);
+      padding:28px;
+      backdrop-filter:blur(6px);
+    }
+
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:24px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .header h1{
+      margin:0;
+      text-align:center;
+      font-size:clamp(28px, 4vw, 44px);
+      line-height:1.1;
+      text-shadow:0 0 18px rgba(0,255,255,0.18);
+    }
+
+    .logo{
+      height:72px;
+      max-width:220px;
+      object-fit:contain;
+      display:block;
+      background:rgba(255,255,255,0.04);
+      border-radius:10px;
+      padding:4px 8px;
+    }
+
+    .subtitle{
+      text-align:center;
+      font-size:18px;
+      color:#d8edff;
+      margin:0 0 12px;
+    }
+
+    .intro-boxes{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:14px;
+      margin:22px 0;
+    }
+
+    .intro-item{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:16px;
+      color:#eaf6ff;
+    }
+
+    .intro-item strong{
+      display:block;
+      margin-bottom:6px;
+      color:#7feaff;
+      font-size:16px;
+    }
+
+    .start-wrap{
+      text-align:center;
+      margin-top:22px;
+    }
+
+    .cyber-button{
+      padding:15px 28px;
+      font-size:17px;
+      font-weight:bold;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(135deg, #0072ff, #00c6ff);
+      box-shadow:0 8px 22px rgba(0,114,255,0.28);
+      transition:transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    .cyber-button:hover{
+      transform:translateY(-2px) scale(1.01);
+      box-shadow:0 12px 28px rgba(0,114,255,0.35);
+    }
+
+    .cyber-button:active{
+      transform:translateY(0);
+    }
+
+    .quiz-shell{
+      display:none;
+    }
+
+    .top-panel{
+      position:sticky;
+      top:10px;
+      z-index:50;
+      margin-bottom:18px;
+      background:rgba(3,16,31,0.84);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(0,255,255,0.14);
+      border-radius:18px;
+      padding:14px 16px;
+      box-shadow:0 8px 28px rgba(0,0,0,0.22);
+    }
+
+    .top-panel-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .top-panel-title{
+      font-weight:bold;
+      font-size:16px;
+      color:#dff7ff;
+    }
+
+    .counter{
+      color:#9feeff;
+      font-weight:bold;
+      font-size:15px;
+    }
+
+    .progress-wrap{
+      width:100%;
+      height:14px;
+      background:rgba(255,255,255,0.1);
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background:linear-gradient(90deg, #00c6ff, #00ffd5);
+      box-shadow:0 0 16px rgba(0,255,213,0.4);
+      transition:width 0.25s ease;
+    }
+
+    .quiz-card{
+      background:rgba(4,18,38,0.66);
+      border:1px solid rgba(0,255,255,0.14);
+      border-radius:22px;
+      padding:20px;
+      box-shadow:0 10px 35px rgba(0,0,0,0.25);
+    }
+
+    .quiz-intro{
+      text-align:center;
+      color:#d8edff;
+      margin:0 0 22px;
+      font-size:17px;
+    }
+
+    .question{
+      background:rgba(255,255,255,0.96);
+      color:#101828;
+      padding:20px;
+      margin-bottom:16px;
+      border-radius:16px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.18);
+      border:1px solid rgba(0,0,0,0.04);
+    }
+
+    .question p{
+      margin:0 0 14px;
+      font-weight:bold;
+      font-size:18px;
+      color:#0b2440;
+    }
+
+    .question label{
+      display:block;
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      transition:background 0.18s ease, transform 0.18s ease;
+      margin-bottom:6px;
+    }
+
+    .question label:hover{
+      background:#eef8ff;
+      transform:translateX(2px);
+    }
+
+    .question input[type="radio"]{
+      margin-right:10px;
+      transform:scale(1.1);
+    }
+
+    .submit-wrap{
+      text-align:center;
+      margin-top:24px;
+    }
+
+    .popup-bg{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.7);
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      padding:18px;
+    }
+
+    .popup{
+      position:relative;
+      background:#ffffff;
+      color:#101828;
+      padding:28px;
+      border-radius:22px;
+      width:min(920px, 100%);
+      max-height:88vh;
+      overflow:auto;
+      box-shadow:0 18px 48px rgba(0,0,0,0.32);
+    }
+
+    .popup.good{
+      border:4px solid #2fbf71;
+    }
+
+    .popup.medium{
+      border:4px solid #f0b429;
+    }
+
+    .popup.bad{
+      border:4px solid #e55353;
+      animation:shake 0.45s ease-in-out 2;
+    }
+
+    .popup h2{
+      margin-top:0;
+      margin-bottom:12px;
+      font-size:30px;
+    }
+
+    .result-badge{
+      display:inline-block;
+      padding:9px 16px;
+      border-radius:999px;
+      font-weight:bold;
+      margin-bottom:14px;
+    }
+
+    .good .result-badge{
+      background:#e7f8ef;
+      color:#1e8e52;
+    }
+
+    .medium .result-badge{
+      background:#fff6df;
+      color:#9a6700;
+    }
+
+    .bad .result-badge{
+      background:#fdecec;
+      color:#b42318;
+    }
+
+    .score-line{
+      font-size:18px;
+      margin-bottom:10px;
+    }
+
+    .score-big{
+      font-size:42px;
+      font-weight:bold;
+      color:#0b2440;
+    }
+
+    .popup p{
+      line-height:1.55;
+    }
+
+    .feedback-list{
+      padding-left:22px;
+    }
+
+    .feedback-list li{
+      margin-bottom:14px;
+      line-height:1.5;
+    }
+
+    .correct-answer{
+      color:#0a7a33;
+      font-weight:bold;
+    }
+
+    .wrong-note{
+      color:#b42318;
+      font-weight:bold;
+    }
+
+    .close-btn{
+      margin-top:18px;
+    }
+
+    .secondary-btn{
+      background:linear-gradient(135deg, #12345c, #1d5fa7);
+      margin-left:10px;
+    }
+
+    .effects{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:1100;
+    }
+
+    .confetti{
+      position:absolute;
+      top:-20px;
+      width:12px;
+      height:20px;
+      opacity:0.95;
+      animation:fall linear forwards;
+      border-radius:2px;
+    }
+
+    .rocket{
+      position:absolute;
+      bottom:-40px;
+      font-size:30px;
+      animation:rocketUp 1.8s ease-out forwards;
+      filter:drop-shadow(0 0 10px rgba(255,255,255,0.25));
+    }
+
+    .bad-icon{
+      position:absolute;
+      font-size:28px;
+      opacity:0.95;
+      animation:dropBad 1.9s linear forwards;
+    }
+
+    .burst{
+      position:absolute;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      animation:burstPop 0.9s ease-out forwards;
+      opacity:0.9;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:1;
+      }
+    }
+
+    @keyframes rocketUp{
+      0%{
+        transform:translateY(0) scale(0.8);
+        opacity:0;
+      }
+      20%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-100vh) scale(1.15);
+        opacity:0;
+      }
+    }
+
+    @keyframes burstPop{
+      0%{
+        transform:scale(0.2);
+        opacity:1;
+      }
+      100%{
+        transform:scale(6.2);
+        opacity:0;
+      }
+    }
+
+    @keyframes dropBad{
+      0%{
+        transform:translateY(-40px) scale(0.8);
+        opacity:0;
+      }
+      15%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(110vh) scale(1.2);
+        opacity:0.2;
+      }
+    }
+
+    @keyframes shake{
+      0%{ transform:translateX(0); }
+      20%{ transform:translateX(-8px); }
+      40%{ transform:translateX(8px); }
+      60%{ transform:translateX(-6px); }
+      80%{ transform:translateX(6px); }
+      100%{ transform:translateX(0); }
+    }
+
+    @media (max-width: 900px){
+      .intro-boxes{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 768px){
+      .container{
+        width:min(100% - 20px, 1100px);
+      }
+
+      .logo{
+        height:58px;
+        max-width:170px;
+      }
+
+      .header{
+        gap:14px;
+      }
+
+      .header h1{
+        font-size:30px;
+      }
+
+      .question p{
+        font-size:17px;
+      }
+
+      .popup{
+        padding:20px;
+      }
+
+      .score-big{
+        font-size:34px;
+      }
+
+      .secondary-btn{
+        margin-left:0;
+        margin-top:10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="matrix"></canvas>
+  <div class="bg-overlay"></div>
+  <div class="cyber-grid"></div>
+
+  <section class="intro-screen" id="introScreen">
+    <div class="intro-card">
+      <div class="header">
+        <img src="alma logo.png" alt="Logo Alma" class="logo">
+        <h1>🔐 Test rápido de Ciberseguridad</h1>
+        <img src="logo-finsa-grupo.png" alt="Logo Finsa Grupo" class="logo">
+      </div>
+
+      <p class="subtitle">
+        Descubre en unos minutos si tus hábitos digitales son seguros… o si eres carne de phishing.
+      </p>
+
+      <div class="intro-boxes">
+        <div class="intro-item">
+          <strong>🧠 Qué vas a ver</strong>
+          Tu puntuación final y tu nivel de seguridad.
+        </div>
+        <div class="intro-item">
+          <strong>📋 Qué analiza</strong>
+          Contraseñas, accesos, correos sospechosos, software y hábitos.
+        </div>
+        <div class="intro-item">
+          <strong>🎯 Qué obtienes</strong>
+          Las respuestas correctas para aprender lo que has fallado.
+        </div>
+      </div>
+
+      <div class="start-wrap">
+        <button class="cyber-button" onclick="startQuiz()">Comenzar test</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="container quiz-shell" id="quizShell">
+    <div class="top-panel">
+      <div class="top-panel-row">
+        <div class="top-panel-title">Panel de progreso</div>
+        <div class="counter" id="counterText">0 de 10 respondidas</div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="header">
+        <img src="alma logo.png" alt="Logo Alma" class="logo">
+        <h1>🔐 Test rápido de Ciberseguridad</h1>
+        <img src="logo-finsa-grupo.png" alt="Logo Finsa Grupo" class="logo">
+      </div>
+
+      <p class="quiz-intro">
+        Responde con sinceridad. Al final verás tu puntuación, lo que has fallado y la recomendación correcta.
+      </p>
+
+      <form id="quiz">
+        <div class="question">
+          <p>1. ¿Tu contraseña es realmente robusta o es fácil de adivinar?</p>
+          <label><input type="radio" name="q1" value="2"> Uso contraseñas largas, únicas y difíciles de adivinar</label>
+          <label><input type="radio" name="q1" value="1"> Mis contraseñas son aceptables, aunque mejorables</label>
+          <label><input type="radio" name="q1" value="0"> Suelo usar contraseñas fáciles de recordar</label>
+        </div>
+
+        <div class="question">
+          <p>2. ¿Utilizas la misma contraseña en varios servicios porque es más cómodo recordarla?</p>
+          <label><input type="radio" name="q2" value="2"> Nunca, cada servicio tiene su propia contraseña</label>
+          <label><input type="radio" name="q2" value="1"> En algún caso aislado</label>
+          <label><input type="radio" name="q2" value="0"> Sí, reutilizo varias contraseñas</label>
+        </div>
+
+        <div class="question">
+          <p>3. Cuando un sistema lo permite, ¿activas el doble factor de autenticación (MFA)?</p>
+          <label><input type="radio" name="q3" value="2"> Siempre que está disponible</label>
+          <label><input type="radio" name="q3" value="1"> A veces, según el servicio</label>
+          <label><input type="radio" name="q3" value="0"> Normalmente lo dejo para más adelante</label>
+        </div>
+
+        <div class="question">
+          <p>4. ¿Has guardado alguna vez contraseñas en un documento, notas o Excel?</p>
+          <label><input type="radio" name="q4" value="2"> Nunca</label>
+          <label><input type="radio" name="q4" value="1"> Alguna vez lo he hecho</label>
+          <label><input type="radio" name="q4" value="0"> Sí, lo hago para no olvidarlas</label>
+        </div>
+
+        <div class="question">
+          <p>5. ¿Tu navegador recuerda tus contraseñas? ¿Es realmente la opción más segura?</p>
+          <label><input type="radio" name="q5" value="2"> Prefiero un gestor seguro o una política controlada</label>
+          <label><input type="radio" name="q5" value="1"> Uso el navegador con cautela</label>
+          <label><input type="radio" name="q5" value="0"> Sí, dejo todo guardado en el navegador sin más</label>
+        </div>
+
+        <div class="question">
+          <p>6. Si un compañero te pide acceso rápido, ¿compartirías tus credenciales?</p>
+          <label><input type="radio" name="q6" value="2"> Nunca, cada persona debe usar su propio acceso</label>
+          <label><input type="radio" name="q6" value="1"> Solo en una urgencia muy concreta</label>
+          <label><input type="radio" name="q6" value="0"> Sí, si así se resuelve antes</label>
+        </div>
+
+        <div class="question">
+          <p>7. ¿Instalas solo software autorizado o alguna vez pruebas programas descargados de internet?</p>
+          <label><input type="radio" name="q7" value="2"> Solo software autorizado y verificado</label>
+          <label><input type="radio" name="q7" value="1"> A veces pruebo algo, pero con precaución</label>
+          <label><input type="radio" name="q7" value="0"> Sí, he instalado programas de internet para probar</label>
+        </div>
+
+        <div class="question">
+          <p>8. ¿Tienes el sistema, antivirus y aplicaciones actualizadas?</p>
+          <label><input type="radio" name="q8" value="2"> Sí, procuro mantener todo actualizado</label>
+          <label><input type="radio" name="q8" value="1"> Algunas veces lo pospongo</label>
+          <label><input type="radio" name="q8" value="0"> Suelo dejar las actualizaciones pendientes</label>
+        </div>
+
+        <div class="question">
+          <p>9. Cuando aparece una actualización de seguridad, ¿la aplicas o la dejas pendiente?</p>
+          <label><input type="radio" name="q9" value="2"> La aplico cuanto antes</label>
+          <label><input type="radio" name="q9" value="1"> A veces la pospongo un poco</label>
+          <label><input type="radio" name="q9" value="0"> La suelo dejar para otro momento</label>
+        </div>
+
+        <div class="question">
+          <p>10. ¿Has instalado alguna extensión del navegador sin comprobar realmente su origen?</p>
+          <label><input type="radio" name="q10" value="2"> No, solo instalo extensiones verificadas</label>
+          <label><input type="radio" name="q10" value="1"> Puede que alguna vez</label>
+          <label><input type="radio" name="q10" value="0"> Sí, he instalado extensiones sin revisar mucho</label>
+        </div>
+
+        <div class="question">
+          <p>11. Cuando te levantas del puesto de trabajo, ¿bloqueas el equipo siempre?</p>
+          <label><input type="radio" name="q11" value="2"> Siempre</label>
+          <label><input type="radio" name="q11" value="1"> Casi siempre</label>
+          <label><input type="radio" name="q11" value="0"> No suelo hacerlo</label>
+        </div>
+
+        <div class="question">
+          <p>12. ¿Utilizas solo herramientas de acceso remoto autorizadas?</p>
+          <label><input type="radio" name="q12" value="2"> Sí, únicamente herramientas autorizadas</label>
+          <label><input type="radio" name="q12" value="1"> Alguna vez he usado otra conocida</label>
+          <label><input type="radio" name="q12" value="0"> Uso cualquiera que me resulte cómoda</label>
+        </div>
+
+        <div class="question">
+          <p>13. ¿Has activado MFA en servicios en la nube o accesos remotos cuando está disponible?</p>
+          <label><input type="radio" name="q13" value="2"> Sí, siempre que existe la opción</label>
+          <label><input type="radio" name="q13" value="1"> En algunos sí y en otros no</label>
+          <label><input type="radio" name="q13" value="0"> No suelo activarlo</label>
+        </div>
+
+        <div class="question">
+          <p>14. ¿El acceso a la información está limitado realmente a quien lo necesita?</p>
+          <label><input type="radio" name="q14" value="2"> Sí, se comparte solo lo necesario</label>
+          <label><input type="radio" name="q14" value="1"> A veces hay más acceso del recomendable</label>
+          <label><input type="radio" name="q14" value="0"> Se comparte más de la cuenta</label>
+        </div>
+
+        <div class="question">
+          <p>15. Si necesitas conectarte fuera de la oficina, ¿lo haces desde redes seguras?</p>
+          <label><input type="radio" name="q15" value="2"> Sí, solo desde redes seguras o controladas</label>
+          <label><input type="radio" name="q15" value="1"> A veces uso redes que no controlo del todo</label>
+          <label><input type="radio" name="q15" value="0"> Sí, me conecto desde cualquier WiFi disponible</label>
+        </div>
+
+        <div class="question">
+          <p>16. Cuando recibes un correo inesperado con un enlace o adjunto, ¿qué haces?</p>
+          <label><input type="radio" name="q16" value="2"> Lo reviso con calma antes de abrir nada</label>
+          <label><input type="radio" name="q16" value="1"> Depende de quién parezca enviarlo</label>
+          <label><input type="radio" name="q16" value="0"> Lo abro directamente</label>
+        </div>
+
+        <div class="question">
+          <p>17. ¿Compruebas siempre quién es realmente el remitente antes de abrir archivos o introducir información?</p>
+          <label><input type="radio" name="q17" value="2"> Sí, siempre verifico remitente y contexto</label>
+          <label><input type="radio" name="q17" value="1"> A veces lo reviso</label>
+          <label><input type="radio" name="q17" value="0"> No siempre lo compruebo</label>
+        </div>
+
+        <div class="question">
+          <p>18. Si un correo te pide credenciales o datos, ¿estás seguro de que es legítimo?</p>
+          <label><input type="radio" name="q18" value="2"> Nunca introduzco credenciales sin verificar por un canal oficial</label>
+          <label><input type="radio" name="q18" value="1"> Primero intento confirmar si es real</label>
+          <label><input type="radio" name="q18" value="0"> Podría introducirlos si parece convincente</label>
+        </div>
+
+        <div class="question">
+          <p>19. Cuando algo te genera dudas, ¿preguntas o prefieres comprobarlo por tu cuenta?</p>
+          <label><input type="radio" name="q19" value="2"> Pregunto o escalo la duda por el canal adecuado</label>
+          <label><input type="radio" name="q19" value="1"> Suelo intentar revisarlo yo primero</label>
+          <label><input type="radio" name="q19" value="0"> Normalmente actúo por mi cuenta sin consultar</label>
+        </div>
+
+        <div class="question">
+          <p>20. ¿Trabajas con una cuenta sin privilegios de administrador o utilizas permisos elevados para todo?</p>
+          <label><input type="radio" name="q20" value="2"> Trabajo sin privilegios elevados para tareas normales</label>
+          <label><input type="radio" name="q20" value="1"> Depende del equipo o del momento</label>
+          <label><input type="radio" name="q20" value="0"> Utilizo permisos elevados para casi todo</label>
+        </div>
+
+        <div class="question">
+          <p>21. ¿La información crítica con la que trabajas tiene copias de seguridad recientes?</p>
+          <label><input type="radio" name="q21" value="2"> Sí, existen copias recientes y controladas</label>
+          <label><input type="radio" name="q21" value="1"> Creo que sí, aunque no siempre lo compruebo</label>
+          <label><input type="radio" name="q21" value="0"> No lo sé o no las hay recientes</label>
+        </div>
+
+        <div class="question">
+          <p>22. Si encuentras un USB o dispositivo externo, ¿lo conectarías para ver qué contiene?</p>
+          <label><input type="radio" name="q22" value="2"> No, nunca conectaría un dispositivo desconocido</label>
+          <label><input type="radio" name="q22" value="1"> Depende de dónde aparezca</label>
+          <label><input type="radio" name="q22" value="0"> Sí, lo conectaría para ver qué hay</label>
+        </div>
+
+        <div class="submit-wrap">
+          <button type="button" class="cyber-button" onclick="calculateScore()">Ver resultado</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div class="popup-bg" id="popupBg">
+    <div class="popup" id="popupContent"></div>
+  </div>
+
+  <div class="effects" id="effects"></div>
+
+  <script>
+    const totalQuestions = 22;
+
+    const answersData = {
+      q1: { correctValue: "2", question: "¿Tu contraseña es realmente robusta o es fácil de adivinar?", correctText: "Usar contraseñas largas, únicas y difíciles de adivinar para cada servicio." },
+      q2: { correctValue: "2", question: "¿Utilizas la misma contraseña en varios servicios porque es más cómodo recordarla?", correctText: "No reutilizar contraseñas entre distintos servicios." },
+      q3: { correctValue: "2", question: "Cuando un sistema lo permite, ¿activas el doble factor de autenticación (MFA)?", correctText: "Activar MFA siempre que esté disponible." },
+      q4: { correctValue: "2", question: "¿Has guardado alguna vez contraseñas en un documento, notas o Excel?", correctText: "No guardar contraseñas en documentos, notas o Excel." },
+      q5: { correctValue: "2", question: "¿Tu navegador recuerda tus contraseñas? ¿Es realmente la opción más segura?", correctText: "Usar una política segura o un gestor de contraseñas adecuado; no dejar todo guardado sin control." },
+      q6: { correctValue: "2", question: "Si un compañero te pide acceso rápido, ¿compartirías tus credenciales?", correctText: "Nunca compartir credenciales; cada persona debe usar su propio acceso." },
+      q7: { correctValue: "2", question: "¿Instalas solo software autorizado o alguna vez pruebas programas descargados de internet?", correctText: "Instalar solo software autorizado y verificado." },
+      q8: { correctValue: "2", question: "¿Tienes el sistema, antivirus y aplicaciones actualizadas?", correctText: "Mantener sistema, antivirus y aplicaciones actualizados." },
+      q9: { correctValue: "2", question: "Cuando aparece una actualización de seguridad, ¿la aplicas o la dejas pendiente?", correctText: "Aplicar las actualizaciones de seguridad cuanto antes." },
+      q10: { correctValue: "2", question: "¿Has instalado alguna extensión del navegador sin comprobar realmente su origen?", correctText: "Instalar solo extensiones verificadas y necesarias." },
+      q11: { correctValue: "2", question: "Cuando te levantas del puesto de trabajo, ¿bloqueas el equipo siempre?", correctText: "Bloquear siempre el equipo al ausentarse." },
+      q12: { correctValue: "2", question: "¿Utilizas solo herramientas de acceso remoto autorizadas?", correctText: "Usar únicamente herramientas de acceso remoto autorizadas." },
+      q13: { correctValue: "2", question: "¿Has activado MFA en servicios en la nube o accesos remotos cuando está disponible?", correctText: "Activar MFA en accesos remotos y servicios en la nube siempre que se pueda." },
+      q14: { correctValue: "2", question: "¿El acceso a la información está limitado realmente a quien lo necesita?", correctText: "Aplicar el principio de mínimo privilegio: solo accede quien realmente lo necesita." },
+      q15: { correctValue: "2", question: "Si necesitas conectarte fuera de la oficina, ¿lo haces desde redes seguras?", correctText: "Conectarse solo desde redes seguras o controladas." },
+      q16: { correctValue: "2", question: "Cuando recibes un correo inesperado con un enlace o adjunto, ¿qué haces?", correctText: "Revisarlo con calma antes de abrir enlaces o adjuntos." },
+      q17: { correctValue: "2", question: "¿Compruebas siempre quién es realmente el remitente antes de abrir archivos o introducir información?", correctText: "Verificar siempre el remitente real y el contexto del mensaje." },
+      q18: { correctValue: "2", question: "Si un correo te pide credenciales o datos, ¿estás seguro de que es legítimo?", correctText: "No introducir credenciales desde un correo sin verificar antes por un canal oficial." },
+      q19: { correctValue: "2", question: "Cuando algo te genera dudas, ¿preguntas o prefieres comprobarlo por tu cuenta?", correctText: "Ante la duda, consultar o escalar por el canal adecuado." },
+      q20: { correctValue: "2", question: "¿Trabajas con una cuenta sin privilegios de administrador o utilizas permisos elevados para todo?", correctText: "Trabajar sin privilegios elevados para tareas normales." },
+      q21: { correctValue: "2", question: "¿La información crítica con la que trabajas tiene copias de seguridad recientes?", correctText: "Asegurar copias de seguridad recientes, verificadas y controladas." },
+      q22: { correctValue: "2", question: "Si encuentras un USB o dispositivo externo, ¿lo conectarías para ver qué contiene?", correctText: "No conectar nunca un dispositivo externo desconocido." }
+    };
+
+    function startQuiz(){
+      document.getElementById("introScreen").style.display = "none";
+      document.getElementById("quizShell").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function countAnswered(){
+      let answered = 0;
+      for(let i = 1; i <= totalQuestions; i++){
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if(selected) answered++;
+      }
+      return answered;
+    }
+
+    function updateProgress(){
+      const answered = countAnswered();
+      const percent = (answered / totalQuestions) * 100;
+      document.getElementById("progressBar").style.width = percent + "%";
+      document.getElementById("counterText").textContent = `${answered} de ${totalQuestions} respondidas`;
+    }
+
+    document.addEventListener("change", function(e){
+      if(e.target.matches('input[type="radio"]')){
+        updateProgress();
+      }
+    });
+
+    function calculateScore(){
+      let total = 0;
+      let answered = 0;
+      let mistakesHtml = "";
+
+      for(let i = 1; i <= totalQuestions; i++){
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+
+        if(selected){
+          answered++;
+          total += parseInt(selected.value, 10);
+
+          if(selected.value !== answersData[`q${i}`].correctValue){
+            mistakesHtml += `
+              <li>
+                <span class="wrong-note">Pregunta ${i}:</span> ${answersData[`q${i}`].question}<br>
+                <span class="correct-answer">Respuesta recomendada:</span> ${answersData[`q${i}`].correctText}
+              </li>
+            `;
+          }
+        }
+      }
+
+      if(answered < totalQuestions){
+        alert("Por favor, responde todas las preguntas antes de ver el resultado.");
+        return;
+      }
+
+      const popup = document.getElementById("popupContent");
+      const popupBg = document.getElementById("popupBg");
+      const maxScore = totalQuestions * 2;
+      const percent = Math.round((total / maxScore) * 100);
+
+      let levelClass = "";
+      let levelText = "";
+      let extraMessage = "";
+
+      if(total >= 39){
+        levelClass = "good";
+        levelText = "🏆 Excelente nivel de ciberseguridad";
+        extraMessage = "Has demostrado hábitos muy sólidos. Tu nivel de exposición es bajo y aplicas buenas prácticas de forma consistente.";
+        launchGoodEffects();
+      } else if(total >= 24){
+        levelClass = "medium";
+        levelText = "🟡 Nivel medio";
+        extraMessage = "Tienes varias buenas prácticas, pero todavía hay algunos puntos que conviene reforzar para reducir riesgos.";
+      } else {
+        levelClass = "bad";
+        levelText = "⚠️ Nivel de riesgo alto";
+        extraMessage = "Tus hábitos actuales pueden exponerte a incidentes de seguridad. Conviene revisar cuanto antes varios comportamientos clave.";
+        launchBadEffect();
+      }
+
+      popup.className = `popup ${levelClass}`;
+      popup.innerHTML = `
+        <div class="result-badge">${levelText}</div>
+        <h2>Resultado final</h2>
+        <div class="score-line">Tu puntuación:</div>
+        <div class="score-big">${total}/${maxScore}</div>
+        <p><strong>Equivale a un ${percent}% de buenas prácticas.</strong></p>
+        <p>${extraMessage}</p>
+
+        ${
+          mistakesHtml
+            ? `<h3>Lo que deberías mejorar</h3>
+               <ul class="feedback-list">${mistakesHtml}</ul>`
+            : `<h3>Perfecto</h3>
+               <p>No has fallado ninguna respuesta. Tus hábitos de seguridad son excelentes. Puedes estar bastante tranquil@ 😄</p>`
+        }
+
+        <button class="cyber-button close-btn" onclick="closePopup()">Cerrar</button>
+        <button class="cyber-button secondary-btn close-btn" onclick="restartQuiz()">Repetir test</button>
+      `;
+
+      popupBg.style.display = "flex";
+    }
+
+    function closePopup(){
+      document.getElementById("popupBg").style.display = "none";
+    }
+
+    function restartQuiz(){
+      document.getElementById("popupBg").style.display = "none";
+      document.getElementById("quiz").reset();
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function launchGoodEffects(){
+      const effects = document.getElementById("effects");
+      effects.innerHTML = "";
+
+      for(let i = 0; i < 120; i++){
+        const piece = document.createElement("div");
+        piece.className = "confetti";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.animationDuration = (2 + Math.random() * 2) + "s";
+        piece.style.animationDelay = (Math.random() * 0.8) + "s";
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        piece.style.background = `hsl(${Math.random() * 360}, 90%, 60%)`;
+        effects.appendChild(piece);
+      }
+
+      for(let i = 0; i < 8; i++){
+        const rocket = document.createElement("div");
+        rocket.className = "rocket";
+        rocket.textContent = "🚀";
+        rocket.style.left = (8 + i * 11 + Math.random() * 4) + "vw";
+        rocket.style.animationDelay = (Math.random() * 0.7) + "s";
+        effects.appendChild(rocket);
+      }
+
+      for(let i = 0; i < 18; i++){
+        const burst = document.createElement("div");
+        burst.className = "burst";
+        burst.style.left = Math.random() * 100 + "vw";
+        burst.style.top = (10 + Math.random() * 45) + "vh";
+        burst.style.background = `hsl(${Math.random() * 360}, 95%, 60%)`;
+        burst.style.animationDelay = (0.4 + Math.random() * 1.2) + "s";
+        effects.appendChild(burst);
+      }
+
+      setTimeout(() => {
+        effects.innerHTML = "";
+      }, 5200);
+    }
+
+    function launchBadEffect(){
+      const effects = document.getElementById("effects");
+      effects.innerHTML = "";
+      const icons = ["⚠️","❌","🚨","⛔","💀"];
+
+      for(let i = 0; i < 45; i++){
+        const icon = document.createElement("div");
+        icon.className = "bad-icon";
+        icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+        icon.style.left = Math.random() * 100 + "vw";
+        icon.style.animationDuration = (1.5 + Math.random() * 1.4) + "s";
+        icon.style.animationDelay = (Math.random() * 0.7) + "s";
+        effects.appendChild(icon);
+      }
+
+      setTimeout(() => {
+        effects.innerHTML = "";
+      }, 3600);
+    }
+
+    // Fondo Matrix
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      setupMatrix();
+    }
+
+    let letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ$#@%&*+-<>/";
+    let fontSize = 16;
+    let columns = 0;
+    let drops = [];
+
+    function setupMatrix(){
+      columns = Math.floor(canvas.width / fontSize);
+      drops = [];
+      for(let x = 0; x < columns; x++){
+        drops[x] = Math.random() * canvas.height / fontSize;
+      }
+    }
+
+    function drawMatrix(){
+      ctx.fillStyle = "rgba(2, 11, 26, 0.08)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00e5ff";
+      ctx.font = fontSize + "px monospace";
+
+      for(let i = 0; i < drops.length; i++){
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    resizeCanvas();
+    setInterval(drawMatrix, 35);
+    window.addEventListener("resize", resizeCanvas);
+
+    updateProgress();
+  </script>
+</body>
+</html>
