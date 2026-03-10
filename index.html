@@ -532,7 +532,7 @@
     <div class="top-panel">
       <div class="top-panel-row">
         <div class="top-panel-title">Panel de progreso</div>
-        <div class="counter" id="counterText">0 de 22 respondidas</div>
+        <div class="counter" id="counterText">0 de 10 respondidas</div>
       </div>
       <div class="progress-wrap">
         <div class="progress-bar" id="progressBar"></div>
@@ -546,162 +546,78 @@
       </div>
 
       <p class="quiz-intro">
-        Responde con sinceridad. Al final verás tu puntuación, lo que has fallado y la recomendación correcta.
+        Responde estas 10 preguntas. Al final verás tu puntuación, lo que has fallado y la recomendación correcta.
       </p>
 
       <form id="quiz">
         <div class="question">
-          <p>1. ¿Tu contraseña es realmente robusta o es fácil de adivinar?</p>
+          <p>1. ¿Tus contraseñas son robustas?</p>
           <label><input type="radio" name="q1" value="2"> Uso contraseñas largas, únicas y difíciles de adivinar</label>
-          <label><input type="radio" name="q1" value="1"> Mis contraseñas son aceptables, aunque mejorables</label>
+          <label><input type="radio" name="q1" value="1"> Son aceptables, aunque mejorables</label>
           <label><input type="radio" name="q1" value="0"> Suelo usar contraseñas fáciles de recordar</label>
         </div>
 
         <div class="question">
-          <p>2. ¿Utilizas la misma contraseña en varios servicios porque es más cómodo recordarla?</p>
+          <p>2. ¿Utilizas la misma contraseña en varios servicios?</p>
           <label><input type="radio" name="q2" value="2"> Nunca, cada servicio tiene su propia contraseña</label>
           <label><input type="radio" name="q2" value="1"> En algún caso aislado</label>
           <label><input type="radio" name="q2" value="0"> Sí, reutilizo varias contraseñas</label>
         </div>
 
         <div class="question">
-          <p>3. Cuando un sistema lo permite, ¿activas el doble factor de autenticación (MFA)?</p>
+          <p>3. "Cuando un sistema lo permite, ¿activas el doble factor MFA(doble factor de autenticación)?"</p>
           <label><input type="radio" name="q3" value="2"> Siempre que está disponible</label>
-          <label><input type="radio" name="q3" value="1"> A veces, según el servicio</label>
+          <label><input type="radio" name="q3" value="1"> A veces</label>
           <label><input type="radio" name="q3" value="0"> Normalmente lo dejo para más adelante</label>
         </div>
 
         <div class="question">
-          <p>4. ¿Has guardado alguna vez contraseñas en un documento, notas o Excel?</p>
-          <label><input type="radio" name="q4" value="2"> Nunca</label>
-          <label><input type="radio" name="q4" value="1"> Alguna vez lo he hecho</label>
-          <label><input type="radio" name="q4" value="0"> Sí, lo hago para no olvidarlas</label>
+          <p>4. ¿Instalas únicamente software autorizado?</p>
+          <label><input type="radio" name="q4" value="2"> Solo software autorizado y verificado</label>
+          <label><input type="radio" name="q4" value="1"> A veces pruebo algo con precaución</label>
+          <label><input type="radio" name="q4" value="0"> Sí, instalo programas descargados de internet</label>
         </div>
 
         <div class="question">
-          <p>5. ¿Tu navegador recuerda tus contraseñas? ¿Es realmente la opción más segura?</p>
-          <label><input type="radio" name="q5" value="2"> Prefiero un gestor seguro o una política controlada</label>
-          <label><input type="radio" name="q5" value="1"> Uso el navegador con cautela</label>
-          <label><input type="radio" name="q5" value="0"> Sí, dejo todo guardado en el navegador sin más</label>
+          <p>5. ¿Mantienes tu sistema y aplicaciones actualizadas?</p>
+          <label><input type="radio" name="q5" value="2"> Sí, procuro mantener todo actualizado</label>
+          <label><input type="radio" name="q5" value="1"> Algunas veces lo pospongo</label>
+          <label><input type="radio" name="q5" value="0"> Suelo dejar las actualizaciones pendientes</label>
         </div>
 
         <div class="question">
-          <p>6. Si un compañero te pide acceso rápido, ¿compartirías tus credenciales?</p>
-          <label><input type="radio" name="q6" value="2"> Nunca, cada persona debe usar su propio acceso</label>
-          <label><input type="radio" name="q6" value="1"> Solo en una urgencia muy concreta</label>
-          <label><input type="radio" name="q6" value="0"> Sí, si así se resuelve antes</label>
+          <p>6. Si recibes un correo inesperado con un enlace o adjunto:</p>
+          <label><input type="radio" name="q6" value="2"> Lo reviso antes de abrir nada</label>
+          <label><input type="radio" name="q6" value="1"> Depende de quién parezca enviarlo</label>
+          <label><input type="radio" name="q6" value="0"> Lo abro directamente</label>
         </div>
 
         <div class="question">
-          <p>7. ¿Instalas solo software autorizado o alguna vez pruebas programas descargados de internet?</p>
-          <label><input type="radio" name="q7" value="2"> Solo software autorizado y verificado</label>
-          <label><input type="radio" name="q7" value="1"> A veces pruebo algo, pero con precaución</label>
-          <label><input type="radio" name="q7" value="0"> Sí, he instalado programas de internet para probar</label>
+          <p>7. ¿Compruebas quién es realmente el remitente antes de abrir archivos o introducir datos?</p>
+          <label><input type="radio" name="q7" value="2"> Sí, siempre verifico remitente y contexto</label>
+          <label><input type="radio" name="q7" value="1"> A veces lo reviso</label>
+          <label><input type="radio" name="q7" value="0"> No siempre lo compruebo</label>
         </div>
 
         <div class="question">
-          <p>8. ¿Tienes el sistema, antivirus y aplicaciones actualizadas?</p>
-          <label><input type="radio" name="q8" value="2"> Sí, procuro mantener todo actualizado</label>
-          <label><input type="radio" name="q8" value="1"> Algunas veces lo pospongo</label>
-          <label><input type="radio" name="q8" value="0"> Suelo dejar las actualizaciones pendientes</label>
+          <p>8. ¿Usas el ordenador de trabajo para uso profesional únicamente?</p>
+          <label><input type="radio" name="q8" value="2"> Sí, exclusivamente para trabajo</label>
+          <label><input type="radio" name="q8" value="1"> Casi siempre, aunque alguna vez lo uso para algo personal</label>
+          <label><input type="radio" name="q8" value="0"> No, también lo uso habitualmente para temas personales</label>
         </div>
 
         <div class="question">
-          <p>9. Cuando aparece una actualización de seguridad, ¿la aplicas o la dejas pendiente?</p>
-          <label><input type="radio" name="q9" value="2"> La aplico cuanto antes</label>
-          <label><input type="radio" name="q9" value="1"> A veces la pospongo un poco</label>
-          <label><input type="radio" name="q9" value="0"> La suelo dejar para otro momento</label>
+          <p>9. Si necesitas conectarte fuera de la oficina:</p>
+          <label><input type="radio" name="q9" value="2"> Solo desde redes seguras o controladas</label>
+          <label><input type="radio" name="q9" value="1"> A veces uso redes que no controlo del todo</label>
+          <label><input type="radio" name="q9" value="0"> Me conecto desde cualquier WiFi disponible</label>
         </div>
 
         <div class="question">
-          <p>10. ¿Has instalado alguna extensión del navegador sin comprobar realmente su origen?</p>
-          <label><input type="radio" name="q10" value="2"> No, solo instalo extensiones verificadas</label>
-          <label><input type="radio" name="q10" value="1"> Puede que alguna vez</label>
-          <label><input type="radio" name="q10" value="0"> Sí, he instalado extensiones sin revisar mucho</label>
-        </div>
-
-        <div class="question">
-          <p>11. Cuando te levantas del puesto de trabajo, ¿bloqueas el equipo siempre?</p>
-          <label><input type="radio" name="q11" value="2"> Siempre</label>
-          <label><input type="radio" name="q11" value="1"> Casi siempre</label>
-          <label><input type="radio" name="q11" value="0"> No suelo hacerlo</label>
-        </div>
-
-        <div class="question">
-          <p>12. ¿Utilizas solo herramientas de acceso remoto autorizadas?</p>
-          <label><input type="radio" name="q12" value="2"> Sí, únicamente herramientas autorizadas</label>
-          <label><input type="radio" name="q12" value="1"> Alguna vez he usado otra conocida</label>
-          <label><input type="radio" name="q12" value="0"> Uso cualquiera que me resulte cómoda</label>
-        </div>
-
-        <div class="question">
-          <p>13. ¿Has activado MFA en servicios en la nube o accesos remotos cuando está disponible?</p>
-          <label><input type="radio" name="q13" value="2"> Sí, siempre que existe la opción</label>
-          <label><input type="radio" name="q13" value="1"> En algunos sí y en otros no</label>
-          <label><input type="radio" name="q13" value="0"> No suelo activarlo</label>
-        </div>
-
-        <div class="question">
-          <p>14. ¿El acceso a la información está limitado realmente a quien lo necesita?</p>
-          <label><input type="radio" name="q14" value="2"> Sí, se comparte solo lo necesario</label>
-          <label><input type="radio" name="q14" value="1"> A veces hay más acceso del recomendable</label>
-          <label><input type="radio" name="q14" value="0"> Se comparte más de la cuenta</label>
-        </div>
-
-        <div class="question">
-          <p>15. Si necesitas conectarte fuera de la oficina, ¿lo haces desde redes seguras?</p>
-          <label><input type="radio" name="q15" value="2"> Sí, solo desde redes seguras o controladas</label>
-          <label><input type="radio" name="q15" value="1"> A veces uso redes que no controlo del todo</label>
-          <label><input type="radio" name="q15" value="0"> Sí, me conecto desde cualquier WiFi disponible</label>
-        </div>
-
-        <div class="question">
-          <p>16. Cuando recibes un correo inesperado con un enlace o adjunto, ¿qué haces?</p>
-          <label><input type="radio" name="q16" value="2"> Lo reviso con calma antes de abrir nada</label>
-          <label><input type="radio" name="q16" value="1"> Depende de quién parezca enviarlo</label>
-          <label><input type="radio" name="q16" value="0"> Lo abro directamente</label>
-        </div>
-
-        <div class="question">
-          <p>17. ¿Compruebas siempre quién es realmente el remitente antes de abrir archivos o introducir información?</p>
-          <label><input type="radio" name="q17" value="2"> Sí, siempre verifico remitente y contexto</label>
-          <label><input type="radio" name="q17" value="1"> A veces lo reviso</label>
-          <label><input type="radio" name="q17" value="0"> No siempre lo compruebo</label>
-        </div>
-
-        <div class="question">
-          <p>18. Si un correo te pide credenciales o datos, ¿estás seguro de que es legítimo?</p>
-          <label><input type="radio" name="q18" value="2"> Nunca introduzco credenciales sin verificar por un canal oficial</label>
-          <label><input type="radio" name="q18" value="1"> Primero intento confirmar si es real</label>
-          <label><input type="radio" name="q18" value="0"> Podría introducirlos si parece convincente</label>
-        </div>
-
-        <div class="question">
-          <p>19. Cuando algo te genera dudas, ¿preguntas o prefieres comprobarlo por tu cuenta?</p>
-          <label><input type="radio" name="q19" value="2"> Pregunto o escalo la duda por el canal adecuado</label>
-          <label><input type="radio" name="q19" value="1"> Suelo intentar revisarlo yo primero</label>
-          <label><input type="radio" name="q19" value="0"> Normalmente actúo por mi cuenta sin consultar</label>
-        </div>
-
-        <div class="question">
-          <p>20. ¿Trabajas con una cuenta sin privilegios de administrador o utilizas permisos elevados para todo?</p>
-          <label><input type="radio" name="q20" value="2"> Trabajo sin privilegios elevados para tareas normales</label>
-          <label><input type="radio" name="q20" value="1"> Depende del equipo o del momento</label>
-          <label><input type="radio" name="q20" value="0"> Utilizo permisos elevados para casi todo</label>
-        </div>
-
-        <div class="question">
-          <p>21. ¿La información crítica con la que trabajas tiene copias de seguridad recientes?</p>
-          <label><input type="radio" name="q21" value="2"> Sí, existen copias recientes y controladas</label>
-          <label><input type="radio" name="q21" value="1"> Creo que sí, aunque no siempre lo compruebo</label>
-          <label><input type="radio" name="q21" value="0"> No lo sé o no las hay recientes</label>
-        </div>
-
-        <div class="question">
-          <p>22. Si encuentras un USB o dispositivo externo, ¿lo conectarías para ver qué contiene?</p>
-          <label><input type="radio" name="q22" value="2"> No, nunca conectaría un dispositivo desconocido</label>
-          <label><input type="radio" name="q22" value="1"> Depende de dónde aparezca</label>
-          <label><input type="radio" name="q22" value="0"> Sí, lo conectaría para ver qué hay</label>
+          <p>10. ¿El equipo de trabajo es unipersonal o lo usan más personas?</p>
+          <label><input type="radio" name="q10" value="2"> Es de uso unipersonal</label>
+          <label><input type="radio" name="q10" value="1"> En ocasiones concretas lo usa otra persona</label>
+          <label><input type="radio" name="q10" value="0"> Lo usan varias personas</label>
         </div>
 
         <div class="submit-wrap">
@@ -718,34 +634,62 @@
   <div class="effects" id="effects"></div>
 
   <script>
-    const totalQuestions = 22;
+    const totalQuestions = 10;
     let userEmailValue = "";
 
     const RESULTS_ENDPOINT = "https://euphonious-kashata-5f7a83.netlify.app/.netlify/functions/save-result";
 
     const answersData = {
-      q1: { correctValue: "2", question: "¿Tu contraseña es realmente robusta o es fácil de adivinar?", correctText: "Usar contraseñas largas, únicas y difíciles de adivinar para cada servicio." },
-      q2: { correctValue: "2", question: "¿Utilizas la misma contraseña en varios servicios porque es más cómodo recordarla?", correctText: "No reutilizar contraseñas entre distintos servicios." },
-      q3: { correctValue: "2", question: "Cuando un sistema lo permite, ¿activas el doble factor de autenticación (MFA)?", correctText: "Activar MFA siempre que esté disponible." },
-      q4: { correctValue: "2", question: "¿Has guardado alguna vez contraseñas en un documento, notas o Excel?", correctText: "No guardar contraseñas en documentos, notas o Excel." },
-      q5: { correctValue: "2", question: "¿Tu navegador recuerda tus contraseñas? ¿Es realmente la opción más segura?", correctText: "Usar una política segura o un gestor de contraseñas adecuado; no dejar todo guardado sin control." },
-      q6: { correctValue: "2", question: "Si un compañero te pide acceso rápido, ¿compartirías tus credenciales?", correctText: "Nunca compartir credenciales; cada persona debe usar su propio acceso." },
-      q7: { correctValue: "2", question: "¿Instalas solo software autorizado o alguna vez pruebas programas descargados de internet?", correctText: "Instalar solo software autorizado y verificado." },
-      q8: { correctValue: "2", question: "¿Tienes el sistema, antivirus y aplicaciones actualizadas?", correctText: "Mantener sistema, antivirus y aplicaciones actualizados." },
-      q9: { correctValue: "2", question: "Cuando aparece una actualización de seguridad, ¿la aplicas o la dejas pendiente?", correctText: "Aplicar las actualizaciones de seguridad cuanto antes." },
-      q10: { correctValue: "2", question: "¿Has instalado alguna extensión del navegador sin comprobar realmente su origen?", correctText: "Instalar solo extensiones verificadas y necesarias." },
-      q11: { correctValue: "2", question: "Cuando te levantas del puesto de trabajo, ¿bloqueas el equipo siempre?", correctText: "Bloquear siempre el equipo al ausentarse." },
-      q12: { correctValue: "2", question: "¿Utilizas solo herramientas de acceso remoto autorizadas?", correctText: "Usar únicamente herramientas de acceso remoto autorizadas." },
-      q13: { correctValue: "2", question: "¿Has activado MFA en servicios en la nube o accesos remotos cuando está disponible?", correctText: "Activar MFA en accesos remotos y servicios en la nube siempre que se pueda." },
-      q14: { correctValue: "2", question: "¿El acceso a la información está limitado realmente a quien lo necesita?", correctText: "Aplicar el principio de mínimo privilegio: solo accede quien realmente lo necesita." },
-      q15: { correctValue: "2", question: "Si necesitas conectarte fuera de la oficina, ¿lo haces desde redes seguras?", correctText: "Conectarse solo desde redes seguras o controladas." },
-      q16: { correctValue: "2", question: "Cuando recibes un correo inesperado con un enlace o adjunto, ¿qué haces?", correctText: "Revisarlo con calma antes de abrir enlaces o adjuntos." },
-      q17: { correctValue: "2", question: "¿Compruebas siempre quién es realmente el remitente antes de abrir archivos o introducir información?", correctText: "Verificar siempre el remitente real y el contexto del mensaje." },
-      q18: { correctValue: "2", question: "Si un correo te pide credenciales o datos, ¿estás seguro de que es legítimo?", correctText: "No introducir credenciales desde un correo sin verificar antes por un canal oficial." },
-      q19: { correctValue: "2", question: "Cuando algo te genera dudas, ¿preguntas o prefieres comprobarlo por tu cuenta?", correctText: "Ante la duda, consultar o escalar por el canal adecuado." },
-      q20: { correctValue: "2", question: "¿Trabajas con una cuenta sin privilegios de administrador o utilizas permisos elevados para todo?", correctText: "Trabajar sin privilegios elevados para tareas normales." },
-      q21: { correctValue: "2", question: "¿La información crítica con la que trabajas tiene copias de seguridad recientes?", correctText: "Asegurar copias de seguridad recientes, verificadas y controladas." },
-      q22: { correctValue: "2", question: "Si encuentras un USB o dispositivo externo, ¿lo conectarías para ver qué contiene?", correctText: "No conectar nunca un dispositivo externo desconocido." }
+      q1: {
+        correctValue: "2",
+        question: "¿Tus contraseñas son robustas?",
+        correctText: "Usar contraseñas largas, únicas y difíciles de adivinar."
+      },
+      q2: {
+        correctValue: "2",
+        question: "¿Utilizas la misma contraseña en varios servicios?",
+        correctText: "No reutilizar contraseñas entre distintos servicios."
+      },
+      q3: {
+        correctValue: "2",
+        question: "Cuando un sistema lo permite, ¿activas el doble factor MFA(doble factor de autenticación)?",
+        correctText: "Activar MFA siempre que esté disponible."
+      },
+      q4: {
+        correctValue: "2",
+        question: "¿Instalas únicamente software autorizado?",
+        correctText: "Instalar solo software autorizado y verificado."
+      },
+      q5: {
+        correctValue: "2",
+        question: "¿Mantienes tu sistema y aplicaciones actualizadas?",
+        correctText: "Mantener sistema y aplicaciones actualizados."
+      },
+      q6: {
+        correctValue: "2",
+        question: "Si recibes un correo inesperado con un enlace o adjunto:",
+        correctText: "Revisarlo con calma antes de abrir enlaces o adjuntos."
+      },
+      q7: {
+        correctValue: "2",
+        question: "¿Compruebas quién es realmente el remitente antes de abrir archivos o introducir datos?",
+        correctText: "Verificar siempre el remitente real y el contexto del mensaje."
+      },
+      q8: {
+        correctValue: "2",
+        question: "¿Usas el ordenador de trabajo para uso profesional únicamente?",
+        correctText: "Utilizar el equipo de trabajo exclusivamente para fines profesionales."
+      },
+      q9: {
+        correctValue: "2",
+        question: "Si necesitas conectarte fuera de la oficina:",
+        correctText: "Conectarse solo desde redes seguras o controladas."
+      },
+      q10: {
+        correctValue: "2",
+        question: "¿El equipo de trabajo es unipersonal o lo usan más personas?",
+        correctText: "El equipo de trabajo debe ser de uso unipersonal."
+      }
     };
 
     function isValidEmail(email){
@@ -862,12 +806,12 @@
       let levelText = "";
       let extraMessage = "";
 
-      if(total >= 39){
+      if(total >= 17){
         levelClass = "good";
         levelText = "🏆 Excelente nivel de ciberseguridad";
         extraMessage = "Has demostrado hábitos muy sólidos. Tu nivel de exposición es bajo y aplicas buenas prácticas de forma consistente.";
         launchGoodEffects();
-      } else if(total >= 24){
+      } else if(total >= 10){
         levelClass = "medium";
         levelText = "🟡 Nivel medio";
         extraMessage = "Tienes varias buenas prácticas, pero todavía hay algunos puntos que conviene reforzar para reducir riesgos.";
